@@ -85,7 +85,7 @@ const storage = multer.diskStorage({
 
   },
   filename:(req,file,cd)=>{
-    cd(null,`${Date.now}-${ file.originalname}`)
+    cd(null,`${Date.now()}-${ file.originalname}`)
   },
 })
 const upload = multer({storage});
@@ -104,6 +104,29 @@ route.post('/Admin', upload.single('image'), async (req, res) => {
     console.error(err);
     res.send('Error uploading user');
   }
+});
+route.get('/users', async (req, res) => {
+  try {
+    const users = await User.find(); // get all users
+    res.render('users', { users });  // send data to EJS
+  } catch (err) {
+    res.status(500).send("Error fetching users");
+  }
+});
+
+route.get("/addItem",(req,res)=>{
+  res.render("addItem");
+})
+route.post("/addItem",async(req,res)=>{
+  const {name,price,description}=req.body;
+  if(!name || !price || !description){
+    req.session.error = "All fild are require";
+    return res.redirect("/user/addItem");
+
+  }
+ 
+    await User.create({ name, price, description });
+ 
 });
 
 

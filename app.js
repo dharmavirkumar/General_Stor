@@ -16,6 +16,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public')); // For static files like images, css
 app.use(express.urlencoded({extended:true}));
+app.use('/upload', express.static('upload')); // required to access image via URL
+
 
 app.use(session({
   secret: 'your-secret-key',

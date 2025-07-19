@@ -5,8 +5,10 @@ const tryShema = mongoose.Schema({
     email:String,
     password:String,
     confrompassword:String,
-     image:String,
-
+    image:String,
+    price:String,
+    name:String,
+    description:String,
     
 });
 

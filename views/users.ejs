@@ -1,0 +1,10 @@
+<% users.forEach(user => { %>
+  <div>
+    <% if (user.image) { %>
+      <img src="/upload/<%= user.image %>" width="100" />
+    <% } else { %>
+      <p>No image uploaded</p>
+    <% } %>
+    <p>Email: <%= user.email %></p>
+  </div>
+<% }) %>
